@@ -62,9 +62,6 @@ scene.add(ambientLight);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-// クロック
-const clock = new THREE.Clock();
-
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 function App() {
@@ -85,21 +82,6 @@ function App() {
     divRef.current?.appendChild(renderer.domElement);
 
     const updateRender = () => {
-      const elapsedTime = clock.getElapsedTime();
-      // console.log(elapsedTime);
-
-      //オブジェクトの回転
-      // sphere.rotation.x = elapsedTime;
-      // plane.rotation.x = elapsedTime;
-      // octahedron.rotation.x = elapsedTime;
-      // torus.rotation.x = elapsedTime;
-
-      // sphere.rotation.y = elapsedTime;
-      // plane.rotation.y = elapsedTime;
-      // octahedron.rotation.y = elapsedTime;
-
-      // torus.rotation.y = elapsedTime;
-
       controls.update();
 
       // レンダリング
