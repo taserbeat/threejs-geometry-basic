@@ -34,9 +34,29 @@ const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 16);
 const planeGeometry = new THREE.PlaneGeometry(10, 10);
 const torusGeometry = new THREE.TorusGeometry(0.5, 0.2, 15, 100, 2 * Math.PI);
 
+// バッファジオメトリ
+const BUFFER_GEOMETRY_COUNT = 50;
+const bufferGeometry = new THREE.BufferGeometry();
+const bufferPositionArray = new Float32Array(BUFFER_GEOMETRY_COUNT * 9);
+
+for (let i = 0; i < BUFFER_GEOMETRY_COUNT * 9; i++) {
+  bufferPositionArray[i] = (Math.random() - 0.5) * 2;
+}
+
+const bufferPositionAttribute = new THREE.BufferAttribute(
+  bufferPositionArray,
+  3
+);
+
+bufferGeometry.setAttribute("position", bufferPositionAttribute);
+
 // マテリアル
 const material = new THREE.MeshNormalMaterial({
   // wireframe: true,
+});
+
+const meshBasicMterial = new THREE.MeshBasicMaterial({
+  wireframe: true,
 });
 
 // メッシュ化
@@ -53,6 +73,10 @@ const torusMesh = new THREE.Mesh(torusGeometry, material);
 torusMesh.position.x = -1.5;
 
 scene.add(boxMesh, sphereMesh, planeMesh, torusMesh);
+
+const bufferMesh = new THREE.Mesh(bufferGeometry, meshBasicMterial);
+bufferMesh.position.x = -8.0;
+scene.add(bufferMesh);
 
 // ライト
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
