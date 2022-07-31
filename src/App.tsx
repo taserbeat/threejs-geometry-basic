@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { PlaneGeometry } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 import "./App.css";
@@ -30,10 +31,11 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  **/
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 16);
+const planeGeometry = new THREE.PlaneGeometry(10, 10);
 
 // マテリアル
 const material = new THREE.MeshNormalMaterial({
-  wireframe: true,
+  // wireframe: true,
 });
 
 // メッシュ化
@@ -42,7 +44,11 @@ const boxMesh = new THREE.Mesh(boxGeometry, material);
 const sphereMesh = new THREE.Mesh(sphereGeometry, material);
 sphereMesh.position.x = 1.5;
 
-scene.add(boxMesh, sphereMesh);
+const planeMesh = new THREE.Mesh(planeGeometry, material);
+planeMesh.rotation.x = -Math.PI * 0.5;
+planeMesh.position.y = -0.5;
+
+scene.add(boxMesh, sphereMesh, planeMesh);
 
 // ライト
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
