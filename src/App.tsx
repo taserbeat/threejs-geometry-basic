@@ -29,15 +29,20 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  * ジオメトリを作ってみよう
  **/
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 16);
 
 // マテリアル
 const material = new THREE.MeshNormalMaterial({
-  // wireframe: true,
+  wireframe: true,
 });
 
 // メッシュ化
 const boxMesh = new THREE.Mesh(boxGeometry, material);
-scene.add(boxMesh);
+
+const sphereMesh = new THREE.Mesh(sphereGeometry, material);
+sphereMesh.position.x = 1.5;
+
+scene.add(boxMesh, sphereMesh);
 
 // ライト
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
